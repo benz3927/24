@@ -698,23 +698,23 @@ bool check_correct_numbers(const vector<char>& vec, const string& str) {
 * @param solutions a vector of strings of all possible solutions.
 */
 void remove_solutions_with_incorrect_numbers(const vector<double>& nums, vector<string>& solutions) {
-    for (auto it = solutions.begin(); it != solutions.end(); ) {
-        bool should_remove = false;
-        for (const auto& num : nums) {
-            string num_str = to_string(num);
-            int num_count = count(it->begin(), it->end(), num_str[0]);
-            int original_count = count(nums.begin(), nums.end(), num);
-            if (num_count != original_count) {
-                should_remove = true;
-                break;
-            }
-        }
-        if (should_remove) {
-            it = solutions.erase(it);
-        } else {
-            ++it;
+  for (auto it = solutions.begin(); it != solutions.end(); ) {
+    bool should_remove = false;
+    for (const auto& num : nums) {
+        string num_str = to_string(num);
+        int num_count = count(it->begin(), it->end(), num_str[0]);
+        int original_count = count(nums.begin(), nums.end(), num);
+        if (num_count != original_count) {
+            should_remove = true;
+            break;
         }
     }
+    if (should_remove) {
+        it = solutions.erase(it);
+    } else {
+        ++it;
+    }
+  }
 }
 
 /**
