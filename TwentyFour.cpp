@@ -74,7 +74,6 @@ vector<double> operations(double a, double b) {
   return result;
 }
 
-
 /**
 * This function takes the numbers given to make 24 and makes every possible
 * combinations of 2 numbers as vectors and returns a vector of these vectors. The
