@@ -12,20 +12,6 @@ using namespace std;
 const double final_24 = 24.00000;
 
 /**
-* This function checks if there is a solution to the 24 game using a vector of numbers.
-* @param numbers: the vector of numbers that are used to find the solution.
-* @return: true if there is a solution, false if there is not.
-*/
-bool TwentyFour::is_there_solution(vector<double> numbers) {
-  vector<string> expression;
-  final_solutions = get_all_unique_solutions(numbers, expression);
-  if (final_solutions.size() !=0){
-    return true;
-  }
-  return false;
-}
-
-/**
 * This function takes in two strings and a vector of expressions and 
 * converts them to a math expression as a string.
 * @param a: the first string in the math expression.
@@ -100,9 +86,9 @@ vector<vector<double>> combinations(vector<double> numbers) {
           push = false;
         }
         if (combo[0] == possible_combinations[i][0] and
-                combo[1] == possible_combinations[i][1] or
+            combo[1] == possible_combinations[i][1] or
             combo[0] == possible_combinations[i][1] and
-                combo[1] == possible_combinations[i][0]) {
+            combo[1] == possible_combinations[i][0]) {
           push = false;
         }
       }
@@ -271,7 +257,7 @@ string TwentyFour::clean_brackets(string& expression) {
 * @return: a boolean value indicating whether the final expression is valid and equal to 24.
 */
 bool TwentyFour::checker(vector<double> &numbers, vector<string> &expr,
-             string &final_expression) {
+                        string &final_expression) {
   vector<string> string_nums;
   for (auto n : numbers) {
     int truncated_num = static_cast<int>(n);
@@ -288,7 +274,7 @@ bool TwentyFour::checker(vector<double> &numbers, vector<string> &expr,
       double threshold = pow(10.0, -5);
       if (abs(answer - final_24) <= threshold) {
         final_expression =
-            convert_expr_to_string(expr[0], expr[1], answer_exps[i]);
+          convert_expr_to_string(expr[0], expr[1], answer_exps[i]);
         return true;
       }
     }
@@ -324,10 +310,10 @@ double TwentyFour::order(char op){
 // if statements and returning values by cases.
 double TwentyFour::math_precision_operations(double a, double b, char op){
   switch(op){
-      case '+': return ((double)a + (double)b);
-      case '-': return ((double)a - (double)b);
-      case '*': return ((double)a * (double)b);
-      case '/': return ((double)a / (double)b);
+    case '+': return ((double)a + (double)b);
+    case '-': return ((double)a - (double)b);
+    case '*': return ((double)a * (double)b);
+    case '/': return ((double)a / (double)b);
   }
   return -1;
 }
@@ -342,19 +328,19 @@ double TwentyFour::math_precision_operations(double a, double b, char op){
 double TwentyFour::compute_expression(string expres_as_vec, StackD &values, StackC &operators){
   for(long unsigned int i = 0; i < expres_as_vec.length(); i++){
       if(expres_as_vec[i] == ' '){
-          continue;
+        continue;
       }
       else if(expres_as_vec[i] == '('){
-          push_op(operators, expres_as_vec[i]);
+        push_op(operators, expres_as_vec[i]);
       }
       else if(isdigit(expres_as_vec[i])){
-          push_number(expres_as_vec, i, values);
+        push_number(expres_as_vec, i, values);
       }
       else if(expres_as_vec[i] == ')'){
-          process_close_paren(operators, values);
+        process_close_paren(operators, values);
       }
       else{
-          process_operator(expres_as_vec[i], operators, values);
+        process_operator(expres_as_vec[i], operators, values);
       }
   }
   process_remaining_operators(operators, values);
@@ -665,38 +651,14 @@ vector<vector<double>> permutations_of_4(vector<double> numbers) {
 }
 
 /**
- * Checks if the characters in a vector match the characters in a string.
- * @param vec: the vector of characters to check.
- * @param str: the string to compare against.
- * @return true if the counts of characters in vec match the counts in str, false otherwise.
- */
-bool check_correct_numbers(const vector<char>& vec, const string& str) {
-  vector<int> vec_count(4, 0);
-  vector<int> str_count(4, 0);
-  for (int i = 0; i < vec.size(); i++) {
-      vec_count[i] = count(vec.begin(), vec.end(), vec[i]);
-  }
-  for (int i = 0; i < str.length(); i++) {
-      char ch = str[i];
-      if (find(vec.begin(), vec.end(), ch) != vec.end()) {
-          int index = distance(vec.begin(), find(vec.begin(), vec.end(), ch));
-          str_count[index]++;
-      }
-  }
-  // Check if the counts for each character matches
-  for (int i = 0; i < vec_count.size(); i++) {
-      if (vec_count[i] != str_count[i]) {
-          return false;
-      }
-  }
-  return true;
-}
-
-/**
 * Remove solutions from the vector of strings that have incorrect numbers
 * @param nums a vector of doubles of the original numbers.
 * @param solutions a vector of strings of all possible solutions.
 */
+
+// CITE: https://cplusplus.com/reference/algorithm/transform/
+// DESC: transform() is like a for loop for iterators that applies a function to each item
+// in a sequence of values. Transform() applies to C++ objects of different classes.
 bool all_numbers_present(const vector<double>& original_numbers, const string& solution) {
   vector<int> nums(original_numbers.size());
     transform(original_numbers.begin(), original_numbers.end(), nums.begin(), [](double d) {
@@ -739,4 +701,18 @@ vector<string> TwentyFour::get_all_unique_solutions(vector<double> &original_num
     }
   }
   return unique_solutions;
+}
+
+/**
+* This function checks if there is a solution to the 24 game using a vector of numbers.
+* @param numbers: the vector of numbers that are used to find the solution.
+* @return: true if there is a solution, false if there is not.
+*/
+bool TwentyFour::is_there_solution(vector<double> numbers) {
+  vector<string> expression;
+  final_solutions = get_all_unique_solutions(numbers, expression);
+  if (final_solutions.size() !=0){
+    return true;
+  }
+  return false;
 }
