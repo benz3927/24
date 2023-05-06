@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-#include <set>
 using namespace std;
 
 const double final_24 = 24.00000;
