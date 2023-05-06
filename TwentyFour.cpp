@@ -697,24 +697,20 @@ bool check_correct_numbers(const vector<char>& vec, const string& str) {
 * @param nums a vector of doubles of the original numbers.
 * @param solutions a vector of strings of all possible solutions.
 */
-void remove_solutions_with_incorrect_numbers(const vector<double>& nums, vector<string>& solutions) {
-  for (auto it = solutions.begin(); it != solutions.end(); ) {
-    bool should_remove = false;
-    for (const auto& num : nums) {
-      string num_str = to_string(num);
-      int num_count = count(it->begin(), it->end(), num_str[0]);
-      int original_count = count(nums.begin(), nums.end(), num);
-      if (num_count != original_count) {
-          should_remove = true;
-          break;
-      }
+bool all_numbers_present(const vector<double>& original_numbers, const string& solution) {
+  vector<int> nums(original_numbers.size());
+    transform(original_numbers.begin(), original_numbers.end(), nums.begin(), [](double d) {
+      return static_cast<int>(d);
+  });
+  string temp = solution;
+  for (int num : nums) {
+    size_t found = temp.find(to_string(num));
+    if (found == string::npos) {
+      return false;
     }
-    if (should_remove) {
-        it = solutions.erase(it);
-    } else {
-      ++it;
-    }
+    temp.erase(found, 1);
   }
+  return true;
 }
 
 /**
@@ -738,10 +734,9 @@ vector<string> TwentyFour::get_all_unique_solutions(vector<double> &original_num
         push = false;
       }
     }
-    if (push == true) {
+    if (push == true and (all_numbers_present(original_numbers, all_solutions[i]))) {
       unique_solutions.push_back(all_solutions[i]);
     }
   }
-  remove_solutions_with_incorrect_numbers(original_numbers, unique_solutions);
   return unique_solutions;
 }
