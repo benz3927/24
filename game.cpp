@@ -51,6 +51,15 @@ void print_solutions(vector<string> solutions) {
   }
 }
 
+// Print the message to pause the game so that players can discuss who won the round.
+void print_message(){
+    cout << "* Giving you some time to discuss who was the first player to " << endl;
+    cout << "find a correct way to compute 24 using the given cards this round." << endl; 
+    cout << "Please type 'k' when you are done! * " << endl;
+    string k;
+    cin >> k;
+}
+
 /**
 * Function sets up each round of the game 24. It generates random solveable numbers, 
 * prompts the user to solve the game within a certain time limit, 
@@ -75,6 +84,7 @@ void Game::round_keeper(TwentyFour solution) {
     round_timer();
     cout << "Your time is up for this round!" << endl;
     vector<string> expression;
+    print_message();
     cout << "* Possible Solutions: *" << endl;
     solution.final_solutions = solution.get_all_unique_solutions(mode1_numbers, expression);
     print_solutions(solution.final_solutions);
@@ -86,7 +96,6 @@ void Game::round_keeper(TwentyFour solution) {
   cout << "The Game is over!" << endl;
   winner();
 }
-
 
 /**
 * A function to play a beep sound in the last 5 seconds of a round
