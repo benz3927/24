@@ -62,10 +62,11 @@ void print_vector_strings(vector<string> strings) {
 * @param players an integer representing the number of players in the game.
 * @param names a vector of strings representing the names of the players.
 */
-void multiplayer(TwentyFour &solution, int players, vector<string> names){
-    Game game(players, names);
-    game.wins_scoreboard();
-    game.round_keeper(solution);
+void multiplayer(int players, vector<string> names){
+  TwentyFour solution;
+  Game game(players, names);
+  game.wins_scoreboard();
+  game.round_keeper(solution);
 }
 
 /**
@@ -75,30 +76,32 @@ void multiplayer(TwentyFour &solution, int players, vector<string> names){
 * @param solution an object of class TwentyFour that contains the functions to
 * generate and validate solutions to game 24.
 */
-void freeplay(TwentyFour &solution){
-    vector<double> mode0_numbers;
-    vector<string> expr;
-    while (1) {
-      string input;
-      cout << "**  Please input 4 numbers separated by space: **" << endl;
-      getline(cin, input);
-      stringstream ss(input);
-      double num;
-      while (ss >> num) {
-        mode0_numbers.push_back(num);
-      }
-      solution.final_solutions = solution.get_all_unique_solutions(mode0_numbers, expr);
-      if (solution.is_there_solution(mode0_numbers)) {
-        cout << "* Giving you 20 seconds to come up with a solution *" << endl;
-        sleep(20); 
-        cout << "* Possible Solutions: *" << endl;
-        print_vector_strings(solution.final_solutions);
-      }
-      else{
-        cout << " * There is no solution to these set of numbers * " << endl;
-      }
-      mode0_numbers.clear();
+void freeplay(){
+  TwentyFour solution;
+  vector<double> mode0_numbers;
+  vector<string> expr;
+  while (1) {
+    string input;
+    cout << "**  Please input 4 numbers separated by space: **" << endl;
+    getline(cin, input);
+    stringstream ss(input);
+    double num;
+    while (ss >> num) {
+      mode0_numbers.push_back(num);
     }
+    solution.final_solutions = solution.get_all_unique_solutions(mode0_numbers, expr);
+    bool is_there = solution.is_there_solution(mode0_numbers);
+    if (is_there == true) {
+      cout << "* Giving you 20 seconds to come up with a solution *" << endl;
+      sleep(20); 
+      cout << "* Possible Solutions: *" << endl;
+      print_vector_strings(solution.final_solutions);
+    }
+    else{
+      cout << " * There is no solution to these set of numbers * " << endl;
+    }
+    mode0_numbers.clear();
+  }
 }
 
 /**
@@ -116,12 +119,11 @@ int main(int argc, char ** argv) {
   read_file(file_name, game_mode, names);
   num_players = names.size();
   cout << "Welcome to the game of 24! 🏠" << endl;
-  TwentyFour solution;
   vector<string> expression;
   if (game_mode == "0"){
-    freeplay(solution);
+    freeplay();
   }
   if (game_mode == "1"){
-    multiplayer(solution, num_players, names);
+    multiplayer(num_players, names);
   }
 }
