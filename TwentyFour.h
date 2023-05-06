@@ -1,5 +1,4 @@
 #ifndef TWENTY_FOUR_H
-
 #define TWENTY_FOUR_H
 #include "stack.h"
 #include "node.h"
@@ -8,11 +7,12 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-
 using namespace std;
 
 class TwentyFour {
 private: 
+  double threshold = pow(10.0, -5);
+  char math_operators[4] = {'+', '-', '/', '*'};
   void expression_to_vec(vector<string>& expres_as_vec, const string& expression);
   void remove_spaces(vector<string>& expres_as_vec, vector<int>& indices);
   void remove_extra_parentheses(vector<string>& expres_as_vec, vector<int>& indices);
@@ -31,8 +31,6 @@ private:
   bool final_checker(string final_expression);
 
 public:
-  char math_operators[4] = {'+', '-', '/', '*'};
-  double threshold = pow(10.0, -5);
   vector<string> final_solutions;
   bool is_there_solution(vector<double> numbers);
   vector<double> generate_random_numbers();
