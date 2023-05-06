@@ -28,13 +28,14 @@ private:
   void process_operator(char op, StackC& operators, StackD& values);
   void process_remaining_operators(StackC& operators, StackD& values);
   double compute_expression(string expres_as_vec, StackD &values, StackC &operators);
-  bool final_checker(string final_expression);
 
 public:
   vector<string> final_solutions;
   bool is_there_solution(vector<double> numbers);
   vector<double> generate_random_numbers();
   vector<string> get_all_unique_solutions(vector<double> &original_numbers, vector<string> expression);
+  void prompt_user();
+  bool final_checker(string final_expression);
 };
 
 #endif // TWENTY_FOUR_H
