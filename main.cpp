@@ -80,27 +80,23 @@ void freeplay(){
   TwentyFour solution;
   vector<double> mode0_numbers;
   vector<string> expr;
-  while (1) {
-    string input;
-    cout << "**  Please input 4 numbers separated by space: **" << endl;
-    getline(cin, input);
-    stringstream ss(input);
-    double num;
-    while (ss >> num) {
-      mode0_numbers.push_back(num);
-    }
-    solution.final_solutions = solution.get_all_unique_solutions(mode0_numbers, expr);
-    bool is_there = solution.is_there_solution(mode0_numbers);
-    if (is_there == true) {
-      cout << "* Giving you 20 seconds to come up with a solution *" << endl;
-      sleep(20); 
-      cout << "* Possible Solutions: *" << endl;
-      print_vector_strings(solution.final_solutions);
-    }
-    else{
-      cout << " * There is no solution to these set of numbers * " << endl;
-    }
-    mode0_numbers.clear();
+  mode0_numbers.clear();
+  string input;
+  cout << "**  Please input 4 numbers separated by space: **" << endl;
+  getline(cin, input);
+  stringstream ss(input);
+  double num;
+  while (ss >> num) {
+    mode0_numbers.push_back(num);
+  }
+  solution.final_solutions = solution.get_all_unique_solutions(mode0_numbers, expr);
+  if (!solution.is_there_solution(mode0_numbers)) {
+    cout << "There is no solution to these set of numbers." << endl;
+    return;
+  }
+  else {
+    solution.prompt_user();
+    print_vector_strings(solution.final_solutions);
   }
 }
 
