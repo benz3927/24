@@ -6,6 +6,11 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <sstream>
+#include <unistd.h>
 using namespace std;
 
 const double final_24 = 24.00000;
@@ -446,6 +451,7 @@ bool TwentyFour::final_checker(string final_expression){
  return false;
 }
 
+
 /**
 * This helper function takes in a vector of double numbers and generates 
 * a vector of initial expressions that represent the numbers as strings.
@@ -702,6 +708,24 @@ vector<string> TwentyFour::get_all_unique_solutions(vector<double> &original_num
   return unique_solutions;
 }
 
+// Prompt user for a math expression response in freeplay mode and check if 
+// it is correct using the final_checker function.
+void TwentyFour::prompt_user(){
+  cout << "* Giving you 20 seconds to come up with a solution *" << endl;
+  sleep(20); 
+  string player_solution;
+  cout << "What is your solution?" << endl;
+  cin >> player_solution;
+  if (final_checker(player_solution)){
+    cout << "Your answer is correct!" << endl;
+  }
+  else {
+    cout << "Your answer is not correct :(" << endl;
+  }
+  cout << "* Possible Solutions: *" << endl;
+  
+}
+
 /**
 * This function checks if there is a solution to the 24 game using a vector of numbers.
 * @param numbers: the vector of numbers that are used to find the solution.
@@ -710,8 +734,8 @@ vector<string> TwentyFour::get_all_unique_solutions(vector<double> &original_num
 bool TwentyFour::is_there_solution(vector<double> numbers) {
   vector<string> expression;
   final_solutions = get_all_unique_solutions(numbers, expression);
-  if (final_solutions.size() !=0){
-    return true;
+  if (final_solutions.size()==0){
+    return false;
   }
-  return false;
+  return true;
 }
