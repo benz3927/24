@@ -37,6 +37,4 @@ public:
   vector<string> get_all_unique_solutions(vector<double> &original_numbers, vector<string> expression);
 };
 
-
 #endif // TWENTY_FOUR_H
-
