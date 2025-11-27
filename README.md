@@ -157,25 +157,6 @@ vector<double> generate_random_numbers();
 
 ---
 
-## Example Solutions
-
-<img src="solved_.png" alt="Example Output" width="600">
-
-For numbers **13, 5, 1, 9**:
-```
-(13-9)×(5+1) = 24
-(5+1)×(13-9) = 24
-(13-9)×(1+5) = 24
-(1+5)×(13-9) = 24
-```
-
-For numbers **3, 3, 8, 8**:
-```
-8÷(3-8÷3) = 24
-```
-
----
-
 ## Implementation Details
 
 ### Precision Handling
