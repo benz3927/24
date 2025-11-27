@@ -24,11 +24,11 @@ The 24 Game challenges players to use four numbers and basic arithmetic operatio
 
 <img src="home.png" alt="24 Game Home" width="600">
 
-*Main interface showing multiplayer mode with game prompt*
+*Multiplayer mode (Mode 1): Computer generates random numbers, players compete for 30 seconds*
 
 <img src="solved!.png" alt="Solved Example" width="600">
 
-*Example: Given numbers 13, 5, 1, 9, the program finds and validates solutions*
+*Freeplay mode (Mode 0): Players input their own 4 numbers and solve for 24*
 
 ---
 
@@ -56,25 +56,27 @@ make
 
 ## Usage
 
-### Input Format
-
-Create an `input.txt` file with space-separated numbers:
-```
-13 5 1 9
-```
-
 ### Running the Game
 
 ```bash
 ./main input.txt
 ```
 
-The program will:
-1. Read the four numbers from the input file
-2. Give you 20 seconds to solve
-3. Prompt for your solution
-4. Validate your answer
-5. Display all possible solutions
+### Game Flow
+
+1. **Choose mode**: 
+   - Mode 0: Freeplay (you input 4 numbers)
+   - Mode 1: Multiplayer (computer generates random numbers)
+
+2. **If multiplayer mode**: Enter player names (e.g., Bob, Kobe, LeBron, MJ)
+
+3. **Numbers**: 
+   - Mode 0: You input 4 numbers
+   - Mode 1: Computer generates 4 random numbers
+
+4. **Solve**: You have 20-30 seconds to find a solution
+
+5. **Validation**: Program verifies your answer and shows all possible solutions
 
 ---
 
