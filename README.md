@@ -198,7 +198,6 @@ g++ -std=c++11 -o main main.cpp TwentyFour.cpp stack.cpp node.cpp game.cpp playe
 Example test cases included:
 ```
 13 5 1 9    → Multiple solutions
-3 3 8 8     → Requires division
 1 1 1 1     → No solution (program regenerates in multiplayer)
 ```
 
