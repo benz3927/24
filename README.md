@@ -20,21 +20,19 @@ The 24 Game challenges players to use four numbers and basic arithmetic operatio
 
 ---
 
-## Game Modes
+## Screenshots
 
-### Freeplay Mode
-Players enter their own four numbers and attempt to solve for 24.
+### Game Interface
 
-<img src="Screenshot 2024-02-08 at 4.42.00 PM.png" alt="Freeplay Mode" width="600">
+<img src="home.png" alt="24 Game Home" width="600">
 
-*Example: Given numbers 13, 5, 1, 9, the solution (13-9)×(5+1) evaluates to 24*
+*Main interface showing the game prompt and input*
 
-### Multiplayer Mode
-Compete against other players with randomly generated numbers.
+### Example Solution
 
-<img src="Screenshot 2024-02-08 at 4.45.52 PM.png" alt="Multiplayer Mode" width="600">
+<img src="solved!.png" alt="Solved Example" width="600">
 
-*Players have 20 seconds to find a solution. The program verifies answers and shows all possible solutions*
+*Example: Given numbers 13, 5, 1, 9, the program finds and validates solutions like (13-9)×(5+1) = 24*
 
 ---
 
@@ -161,6 +159,8 @@ vector<double> generate_random_numbers();
 
 ## Example Solutions
 
+<img src="solved_.png" alt="Example Output" width="600">
+
 For numbers **13, 5, 1, 9**:
 ```
 (13-9)×(5+1) = 24
@@ -193,12 +193,12 @@ For numbers **3, 3, 8, 8**:
 
 ## Features
 
-✅ **Automatic solution generation** - Finds all unique solutions  
-✅ **Expression validation** - Verifies arithmetic correctness  
-✅ **Multiple game modes** - Single-player, multiplayer, freeplay  
-✅ **Timed challenges** - 20-second solve timer  
-✅ **Clean parenthesization** - Removes unnecessary brackets  
-✅ **Robust parsing** - Handles complex nested expressions  
+- **Automatic solution generation** - Finds all unique solutions  
+- **Expression validation** - Verifies arithmetic correctness  
+- **Multiple game modes** - Single-player, multiplayer, freeplay  
+- **Timed challenges** - 20-second solve timer  
+- **Clean parenthesization** - Removes unnecessary brackets  
+- **Robust parsing** - Handles complex nested expressions  
 
 ---
 
