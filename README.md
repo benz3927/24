@@ -22,17 +22,13 @@ The 24 Game challenges players to use four numbers and basic arithmetic operatio
 
 ## Screenshots
 
-### Game Interface
-
 <img src="home.png" alt="24 Game Home" width="600">
 
-*Main interface showing the game prompt and input*
-
-### Example Solution
+*Main interface showing multiplayer mode with game prompt*
 
 <img src="solved!.png" alt="Solved Example" width="600">
 
-*Example: Given numbers 13, 5, 1, 9, the program finds and validates solutions like (13-9)×(5+1) = 24*
+*Example: Given numbers 13, 5, 1, 9, the program finds and validates solutions*
 
 ---
 
