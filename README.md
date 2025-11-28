@@ -37,6 +37,14 @@ make all
 ./main input.txt
 ```
 
+**Example - Multiplayer Mode:**
+
+<img src="home.png" alt="Multiplayer Mode" width="600">
+
+**Example - Freeplay Mode:**
+
+<img src="solved!.png" alt="Freeplay Mode" width="600">
+
 ### Solver Mode
 ```bash
 ./solver
@@ -56,13 +64,6 @@ Found 20 solution(s):
   2. ((1+5)*3)+6 = 24
   ...
 ```
-
----
-
-## Screenshots
-
-<img src="home.png" alt="Multiplayer Mode" width="400">
-<img src="solved!.png" alt="Freeplay Mode" width="400">
 
 ---
 
