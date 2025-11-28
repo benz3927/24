@@ -1,230 +1,106 @@
 # 24 Game
 
-A C++ implementation of the mathematical card game "24" with multiple game modes including single-player, multiplayer, and freeplay options.
+A C++ implementation of the mathematical card game "24" where players use four numbers and basic arithmetic operations (+, −, ×, ÷) to make 24.
 
-**Authors:** Benjamin Zhao, Leonardo Li  
-**Institution:** Hamilton College  
-**Course:** Computer Science, Data Structures & Algorithms
+**Authors:** Benjamin Zhao, Leonardo Li
 
 ---
 
-## Overview
+## Features
 
-The 24 Game challenges players to use four numbers and basic arithmetic operations (+, −, ×, ÷) to reach the target number 24. This implementation uses recursive algorithms, stacks, and expression parsing to generate and validate solutions.
+### Interactive Game (`./main`)
+- **Freeplay Mode**: Input your own 4 numbers
+- **Multiplayer Mode**: Compete with randomly generated numbers
+- 20-30 second timer with automatic validation
+- Shows all possible solutions
 
-**Key Features:**
-- Automatic solution generation for any valid set of 4 numbers
-- Multiple game modes (single-player, multiplayer, freeplay)
-- Expression validation and evaluation using custom stack implementation
-- Generates all unique solutions with proper parenthesization
-
----
-
-## Screenshots
-
-<img src="home.png" alt="24 Game Home" width="600">
-
-*Multiplayer mode (Mode 1): Computer generates random numbers, players compete for 30 seconds*
-
-<img src="solved!.png" alt="Solved Example" width="600">
-
-*Freeplay mode (Mode 0): Players input their own 4 numbers and solve for 24*
+### Standalone Solver (`./solver`)
+- Finds **all unique solutions** using brute-force
+- Tests all 5 parenthesization patterns
+- Handles fractional intermediate results (e.g., `8÷(3−8÷3)=24` for "3 3 8 8")
 
 ---
 
 ## Installation
-
-### Prerequisites
-- C++ compiler (g++ recommended)
-- Make utility
-
-### Build Instructions
-
 ```bash
-# Clone the repository
 git clone https://github.com/benz3927/24.git
 cd 24
-
-# Compile using make
-make
-
-# Run the program
-./main input.txt
+make all
 ```
 
 ---
 
 ## Usage
 
-### Running the Game
-
+### Game Mode
 ```bash
 ./main input.txt
 ```
 
-### Game Flow
+### Solver Mode
+```bash
+./solver
+```
 
-1. **Choose mode**: 
-   - Mode 0: Freeplay (you input 4 numbers)
-   - Mode 1: Multiplayer (computer generates random numbers)
+**Example:**
+```
+Enter 4 integers (or 'quit' to exit): 3 3 8 8
+Numbers: 3 3 8 8 
+Found 1 solution(s):
+  1. 8/(3-(8/3)) = 24
 
-2. **If multiplayer mode**: Enter player names (e.g., Bob, Kobe, LeBron, MJ)
-
-3. **Numbers**: 
-   - Mode 0: You input 4 numbers
-   - Mode 1: Computer generates 4 random numbers
-
-4. **Solve**: You have 20-30 seconds to find a solution
-
-5. **Validation**: Program verifies your answer and shows all possible solutions
+Enter 4 integers (or 'quit' to exit): 5 6 3 1
+Numbers: 5 6 3 1 
+Found 20 solution(s):
+  1. (1+(3*6))+5 = 24
+  2. ((1+5)*3)+6 = 24
+  ...
+```
 
 ---
 
-## Algorithm
+## Screenshots
 
-### Solution Generation
-
-The program uses a **recursive approach** to generate all possible solutions:
-
-1. **Generate pairs**: Create all possible pairs of numbers from the input
-2. **Apply operations**: For each pair, apply +, −, ×, ÷ operations
-3. **Recurse**: Replace the pair with the result and recursively solve with remaining numbers
-4. **Validate**: Check if the expression evaluates to 24 (within 10⁻⁵ tolerance)
-
-### Expression Evaluation
-
-Uses **two-stack algorithm** for expression parsing:
-- **Values stack**: Stores operands
-- **Operators stack**: Stores operators with precedence handling
-- Supports parenthesized expressions with proper order of operations
-
-### Key Data Structures
-
-- **Stack**: Custom stack implementation for expression evaluation
-- **Vectors**: Store numbers, expressions, and solutions
-- **Recursion**: Generate all permutations and combinations
+<img src="home.png" alt="Multiplayer Mode" width="400">
+<img src="solved!.png" alt="Freeplay Mode" width="400">
 
 ---
 
-## Technical Highlights
+## Algorithms
 
-### Expression Parsing
-```cpp
-// Cleans up expressions by removing unnecessary parentheses
-string clean_brackets(string& expression);
+**Game Mode:** Recursive pair reduction with custom stack-based expression parser
 
-// Evaluates expressions using two-stack algorithm
-double compute_expression(string expres_as_vec, StackD &values, StackC &operators);
-```
-
-### Solution Validation
-```cpp
-// Checks if expression evaluates to 24 (within 10^-5 tolerance)
-bool final_checker(string final_expression);
-
-// Verifies all original numbers are used
-bool all_numbers_present(const vector<double>& original_numbers, const string& solution);
-```
-
-### Random Number Generation
-```cpp
-// Generates solvable sets of 4 random numbers (1-13)
-vector<double> generate_random_numbers();
-```
+**Solver Mode:** Brute-force enumeration testing all permutations × operators × 5 parenthesization patterns (7,680 total expressions)
 
 ---
 
 ## Project Structure
-
 ```
 24/
-├── TwentyFour.cpp       # Core game logic and algorithms
-├── TwentyFour.h         # TwentyFour class header
-├── stack.cpp            # Custom stack implementation
-├── stack.h              # Stack class header
-├── node.cpp             # Node implementation for stack
-├── node.h               # Node class header
-├── game.cpp             # Game mode implementations
-├── game.h               # Game class header
-├── player.cpp           # Player management
-├── player.h             # Player class header
-├── main.cpp             # Entry point
-├── makefile             # Build configuration
-└── input.txt            # Sample input file
+├── main.cpp           # Game entry point
+├── TwentyFour.cpp/h   # Recursive algorithm
+├── 24_solver.cpp      # Brute-force solver
+├── stack.cpp/h        # Custom stack implementation
+├── node.cpp/h         # Stack node
+├── game.cpp/h         # Game modes
+├── player.cpp/h       # Player management
+├── Makefile           # Build configuration
+└── *.png              # Screenshots
 ```
 
 ---
 
-## Implementation Details
-
-### Precision Handling
-- Uses double precision for intermediate calculations
-- Validates final result within 10⁻⁵ tolerance to handle floating-point errors
-- Properly handles division by zero
-
-### Expression Generation
-- Generates all permutations of input numbers
-- Creates all possible operator combinations
-- Removes duplicate solutions
-- Validates that original numbers are preserved
-
----
-
-## Features
-
-- **Automatic solution generation** - Finds all unique solutions  
-- **Expression validation** - Verifies arithmetic correctness  
-- **Multiple game modes** - Single-player, multiplayer, freeplay  
-- **Timed challenges** - 20-second solve timer  
-- **Clean parenthesization** - Removes unnecessary brackets  
-- **Robust parsing** - Handles complex nested expressions  
-
----
-
-## Compilation
-
+## Build Commands
 ```bash
-# Using make
-make
-
-# Manual compilation
-g++ -std=c++11 -o main main.cpp TwentyFour.cpp stack.cpp node.cpp game.cpp player.cpp
+make all       # Build both game and solver
+make           # Build game only
+make solver    # Build solver only
+make clean     # Remove binaries
 ```
-
----
-
-## Testing
-
-Example test cases included:
-```
-13 5 1 9    → Multiple solutions
-1 1 1 1     → No solution (program regenerates in multiplayer)
-```
-
----
-
-## Contributors
-
-- **Benjamin Zhao** ([@benz3927](https://github.com/benz3927))
-- **Leonardo Li** ([@bzhao3927](https://github.com/bzhao3927))
-
----
-
-## Acknowledgments
-
-- **Data Structures & Algorithms Course** - Hamilton College
-- Inspired by the classic 24 card game
-- Uses custom stack implementation for expression evaluation
-
----
-
-## License
-
-Educational project - Hamilton College Computer Science
 
 ---
 
 ## Contact
 
-**Benjamin Zhao** - bzhao@hamilton.edu  
-Hamilton College, Computer Science Department
+Benjamin Zhao - bzhao@hamilton.edu  
+Hamilton College
